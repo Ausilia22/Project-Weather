@@ -2,11 +2,8 @@ class AjaxWeather {
   constructor() {
     this.apiKey = "d29fbc3d215e4cf2c9a57d8f28df4118";
   }
-  async getWeather(city) {
-  //if (location.protocol == 'https:'){
-    // location.href = location.href.replace(/^https:/, 'http:')
-  //}  
-    const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.apiKey}&units=metric`;
+  async getWeather(city) { 
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.apiKey}&units=metric`;
     const weatherData = await fetch(url);
     const weather = await weatherData.json();
     return weather;
