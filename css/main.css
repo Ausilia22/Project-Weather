@@ -1,0 +1,54 @@
+:root {
+  --mainBlack: #333333;
+  --mainWhite: #f5f5f5;
+  --mainYellow: #ffd166;
+  --mainGreen: #06d6a0;
+  --mainBlue: #118ab2;
+  --darkBlue: #073b4c;
+}
+body {
+  background: url(https://cdn.dribbble.com/users/142299/screenshots/8068330/media/b90bb36b765a9dcc2255df80c33b0044.gif);
+  color: black;
+  background-repeat: no-repeat;
+  background-position: -200px 220px;
+}
+.card {
+  box-shadow: 0 10px 15px rgb(0, 0, 0);
+  background: rgb(45, 220, 226);
+
+}
+.cityInput {
+  border: 0.15rem solid transparent;
+  background: white;
+  font-size: 1.5rem;
+  color: black;
+}
+input:focus {
+  background: black;
+}
+
+.submitBtn {
+  background: rgb(25, 247, 25);
+  border: 0.15rem solid transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0.7;
+  color: black;
+}
+.submitBtn:hover {
+  opacity: 5;
+}
+.feedback {
+  display: none;
+}
+.results {
+  display: none;
+  position: center;
+  text-justify: auto;
+
+  
+}
+.showItem {
+  display: block;
+
+}
