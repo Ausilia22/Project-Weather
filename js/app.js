@@ -3,7 +3,7 @@ class AjaxWeather {
     this.apiKey = "d29fbc3d215e4cf2c9a57d8f28df4118";
   }
   async getWeather(city) {
-    const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.apiKey}&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.apiKey}&units=metric`;
     const weatherData = await fetch(url);
     const weather = await weatherData.json();
     return weather;
