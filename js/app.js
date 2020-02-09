@@ -2,8 +2,8 @@ class AjaxWeather {
   constructor() {
     this.apiKey = "d29fbc3d215e4cf2c9a57d8f28df4118";
   }
-  async getWeather(city) { 
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.apiKey}&units=metric`;
+  async getWeather(city) {
+    const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.apiKey}&units=metric`;
     const weatherData = await fetch(url);
     const weather = await weatherData.json();
     return weather;
@@ -18,7 +18,7 @@ class Display {
     this.cityIcon = document.getElementById("cityIcon");
     this.cityTemp = document.getElementById("cityTemp");
     this.cityHumidity = document.getElementById("cityHumidity");
-  } 
+  }
 
 
 
@@ -40,10 +40,12 @@ class Display {
   }
 }
 
-(function() {
+
+(function () {
   const form = document.getElementById("wheatherForm");
   const cityInput = document.getElementById("cityInput");
   const feedback = document.querySelector(".feedback");
+
 
   // class
   const ajax = new AjaxWeather();
@@ -53,24 +55,26 @@ class Display {
     const city = cityInput.value;
 
     if (city.length === 0) {
-      showFeedbackAfterDelay();
       showFeedback("city value cannot be empty");
-  }
-  
-  else { ajax.getWeather(city).then(data => {
-    if( data.message === "city not found"){
-    showFeedbackAfterDelay();
-    showFeedback("city with such name cannot be found");
-}
+    }
+
+    else {
+      ajax.getWeather(city).then(data => {
+        if (data.message === "city not found") {
+          hideResults(".results");
+          cleanInput()
+          showFeedback("city with such name cannot be found");
+        }
 
 
-else if (city >= 0 || city < 0 || city.includes('#') == true || city.includes('&') == true) {
-  showFeedbackAfterDelay();
-  showFeedback("city with such name cannot be found");
-}
+        else if (city >= 0 || city < 0 || city.includes('#') == true || city.includes('&') == true) {
+          cleanInput()
+          showFeedback("city with such name cannot be found");
+        }
 
 
-else {
+        else {
+          showResult(".results");
           display.showWeather(data);
         }
       });
@@ -80,16 +84,31 @@ else {
   function showFeedback(text) {
     feedback.classList.add("showItem");
     feedback.innerHTML = `<p>${text}</p>`;
-
     setTimeout(() => {
       feedback.classList.remove("showItem");
     }, 3000);
   }
 
-  function showFeedbackAfterDelay() {
-    setTimeout(() => {
-    window.location.replace("https://ausilia22.github.io/Project-Weather/");
-    }, 500);
-    }
+
+  function cleanInput() {
+    return $('#cityInput').val("");
+  }
+
+  function hideResults(selector) {
+    ElementToHide = document.querySelector(selector)
+    $(ElementToHide).hide();
+  }
+
+  function showResult(selector) {
+    ElementToShow = document.querySelector(selector)
+    $(ElementToShow).show();
+  }
+
+
+  //function showFeedbackAfterDelay() {
+  //setTimeout(() => {
+  //window.location.replace("http://127.0.0.1:5500");
+  //}, 500);
+  //}
 
 })();
